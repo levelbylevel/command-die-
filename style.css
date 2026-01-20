@@ -1,0 +1,112 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: monospace;
+}
+
+body {
+  background: radial-gradient(circle, #060014, #000);
+  height: 100vh;
+  overflow: hidden;
+  color: #0ff;
+}
+
+#scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+#core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow:
+    0 0 60px #ff0033,
+    0 0 120px #00ffff;
+  animation: pulse 2s infinite alternate;
+}
+
+#title {
+  position: absolute;
+  width: 100%;
+  top: 40%;
+  text-align: center;
+  font-size: 28px;
+  color: white;
+  text-shadow: 0 0 20px #ff0033;
+}
+
+#terminal {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 420px;
+  padding: 10px;
+  display: flex;
+  gap: 8px;
+  background: rgba(0,0,0,0.85);
+  border: 1px solid #0ff;
+  box-shadow: 0 0 30px #0ff;
+}
+
+#cmd {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #0ff;
+  font-size: 16px;
+}
+
+/* ===== COLLAPSE MODE ===== */
+.collapse {
+  animation: screenGlitch 0.08s infinite;
+  filter: contrast(2.5) saturate(4) hue-rotate(120deg);
+}
+
+@keyframes screenGlitch {
+  0% { transform: translate(3px,-2px) skewX(2deg); }
+  25% { transform: translate(-4px,1px) skewY(2deg); }
+  50% { transform: translate(2px,3px) skewX(-2deg); }
+  75% { transform: translate(-2px,-3px) skewY(-2deg); }
+  100% { transform: translate(0); }
+}
+
+.error {
+  position: absolute;
+  color: #ff0033;
+  font-size: 14px;
+  opacity: 0.9;
+  pointer-events: none;
+  animation: fadeUp 1.4s linear forwards;
+}
+
+@keyframes fadeUp {
+  from { opacity: 1; }
+  to { opacity: 0; transform: translateY(-40px); }
+}
+
+.blackout {
+  position: fixed;
+  inset: 0;
+  background: black;
+  animation: fadeBlack 2s forwards;
+  z-index: 9999;
+}
+
+@keyframes fadeBlack {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pulse {
+  from { box-shadow: 0 0 60px #ff0033, 0 0 120px #00ffff; }
+  to { box-shadow: 0 0 160px #ff0033, 0 0 260px #00ffff; }
+}
